@@ -24,12 +24,18 @@ export const getNotes = async () => {
 
 // Generate summary
 export const generateSummary = async (id) => {
-  const res = await API.post(`/notes/${id}/summary`);
+  const res = await API.post(`/notes/summary/${id}`);
   return res.data;
 };
 
 // Delete note
 export const deleteNote = async (id) => {
   const res = await API.delete(`/notes/${id}`);
+  return res.data;
+};
+
+// Update note
+export const updateNote = async (id, data) => {
+  const res = await API.put(`/notes/${id}`, data);
   return res.data;
 };
