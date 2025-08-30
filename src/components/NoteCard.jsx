@@ -1,104 +1,65 @@
-import { useState } from "react";
-import { generateSummary, deleteNote, updateNote } from "../services/Api";
+import { useState } from 'react'
 
-export default function NoteCard({ _id, title, transcript, summary, refresh }) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editTitle, setEditTitle] = useState(title);
-  const [editTranscript, setEditTranscript] = useState(transcript);
-
-  const handleDelete = async () => {
-    await deleteNote(_id);
-    refresh();
-  };
-
-  const handleSummary = async () => {
-    await generateSummary(_id);
-    refresh();
-  };
-
-  const handleSave = async () => {
-    await updateNote(_id, { title: editTitle, transcript: editTranscript });
-    setIsEditing(false);
-    refresh();
-  };
+export default function NoteCard ({ note, onEdit, onDelete, onSummarize }) {
+  const { _id, id, title, transcript, summary } = note
+  const noteId = _id || id
+  const [expanded, setExpanded] = useState(false)
 
   return (
-    <div className="bg-white shadow p-4 rounded-xl my-3">
-      {isEditing ? (
-        <>
-          <input
-            type="text"
-            value={editTitle}
-            onChange={(e) => setEditTitle(e.target.value)}
-            className="border rounded px-2 py-1 w-full mb-2"
-          />
-          <textarea
-            value={editTranscript}
-            onChange={(e) => setEditTranscript(e.target.value)}
-            className="border rounded px-2 py-1 w-full"
-            rows="3"
-          />
-        </>
-      ) : (
-        <>
-          <h2 className="font-semibold">{`Title : ${title}`}</h2>
-          <p className="font-semibold">{`Transcript : ${transcript}`}</p>
-          <p className="text-gray-700">
+    <div className='bg-white rounded-2xl shadow-sm border p-4'>
+      <div className='flex items-start gap-2'>
+        <div className='flex-1'>
+          <div className='flex items-center gap-2'>
+            <h3 className='font-semibold text-lg leading-tight'>
+              {title || 'Untitled'}
+            </h3>
             {summary ? (
-              <>
-                <strong>Summary:</strong> {summary}
-              </>
-            ) : (
-              ' '
-            )}
+              <span className='text-xs px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200'>
+                Summarized
+              </span>
+            ) : null}
+          </div>
+          <p
+            className={`mt-2 text-sm text-neutral-700 ${
+              expanded ? '' : 'line-clamp-3'
+            }`}
+          >
+            {summary || transcript}
           </p>
-        </>
-      )}
+        </div>
+      </div>
 
-      <div className="flex gap-2 mt-2">
-        {isEditing ? (
-          <>
-            <button
-              onClick={handleSave}
-              className="px-3 py-1 bg-green-500 text-white rounded"
-            >
-              Save
-            </button>
-            <button
-              onClick={() => setIsEditing(false)}
-              className="px-3 py-1 bg-gray-200 rounded"
-            >
-              Cancel
-            </button>
-          </>
-        ) : (
-          <>
-            <button
-              onClick={() => setIsEditing(true)}
-              className="px-3 py-1 bg-gray-200 rounded"
-            >
-              Edit
-            </button>
-            <button
-              onClick={handleDelete}
-              className="px-3 py-1 bg-gray-200 rounded"
-            >
-              Delete
-            </button>
-            <button
-              onClick={handleSummary}
-              disabled={!!summary} // disable if summary already exists
-              className={`px-3 py-1 rounded ${
-                summary
-                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                  : "bg-black text-white"
-              }`}
-            >
-              Generate Summary
-            </button>
-          </>
-        )}
+      <div className='flex items-center gap-2 mt-3'>
+        <button
+          onClick={() => setExpanded(v => !v)}
+          className='text-xs px-2 py-1 rounded bg-neutral-100'
+        >
+          {expanded ? 'Collapse' : 'Expand'}
+        </button>
+        <button
+          onClick={() => onEdit(note)}
+          className='text-xs px-2 py-1 rounded bg-neutral-100'
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => onDelete(noteId)}
+          className='text-xs px-2 py-1 rounded bg-neutral-100'
+        >
+          Delete
+        </button>
+        <button
+          onClick={() => onSummarize(noteId)}
+          disabled={!!summary}
+          className={`text-xs px-2 py-1 rounded ${
+            summary
+              ? 'bg-neutral-200 text-neutral-500 cursor-not-allowed'
+              : 'bg-black text-white'
+          }`}
+        >
+          Generate Summary
+        </button>
       </div>
     </div>
-  );
+  )
 }
