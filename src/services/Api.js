@@ -14,6 +14,12 @@ export const transcribeAudio = async (file, title) => {
   return res.data;
 };
 
+// create note
+export const createNote = async (data) => {
+  const res = await API.post("/notes", data);
+  return res.data;
+};
+
 // Get all notes
 export const getNotes = async () => {
   const res = await API.get("/notes");

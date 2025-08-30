@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NoteCard from "./components/NoteCard";
 import { getNotes, transcribeAudio } from "./services/Api";
+import AudioRecorder from "./components/AudioRecorder";
 
 export default function App() {
   const [notes, setNotes] = useState([]);
@@ -9,9 +10,9 @@ export default function App() {
 
   const fetchNotes = async () => {
     const data = await getNotes();
-    console.log('mydata',data.data);
     setNotes(data.data);
   };
+
 
   useEffect(() => {
     fetchNotes();
@@ -28,6 +29,9 @@ export default function App() {
   return (
     <div className="max-w-xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Voice Notes</h1>
+
+      <AudioRecorder onRecordingComplete={(blob) => setFile(blob)} />
+      {/* <NotesPage /> */}
 
       <div className="flex gap-2 mb-4">
         <input

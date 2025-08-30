@@ -41,9 +41,17 @@ export default function NoteCard({ _id, title, transcript, summary, refresh }) {
         </>
       ) : (
         <>
-          <h2 className="font-semibold">{title}</h2>
-          <p className="text-gray-700">{transcript}</p>
-          <p className="text-gray-700">{summary}</p>
+          <h2 className="font-semibold">{`Title : ${title}`}</h2>
+          <p className="font-semibold">{`Transcript : ${transcript}`}</p>
+          <p className="text-gray-700">
+            {summary ? (
+              <>
+                <strong>Summary:</strong> {summary}
+              </>
+            ) : (
+              ' '
+            )}
+          </p>
         </>
       )}
 
@@ -79,7 +87,12 @@ export default function NoteCard({ _id, title, transcript, summary, refresh }) {
             </button>
             <button
               onClick={handleSummary}
-              className="px-3 py-1 bg-black text-white rounded"
+              disabled={!!summary} // disable if summary already exists
+              className={`px-3 py-1 rounded ${
+                summary
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-black text-white"
+              }`}
             >
               Generate Summary
             </button>
