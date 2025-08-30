@@ -1,12 +1,63 @@
-# React + Vite
+# Voice Notes GenAI Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend application** for the Voice Notes GenAI project. It provides a clean, minimal UI to record, upload, manage, edit, and summarize voice notes. Built with **React + Tailwind CSS**, it integrates seamlessly with the backend API to deliver a smooth user experience.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* 🎙️ **Record Notes** directly from your browser microphone.
+* 📤 **Upload Audio Files** and convert them into text notes.
+* 📝 **Edit Notes** with an in-app editor.
+* 🗑️ **Delete Notes** with confirmation.
+* ✨ **AI Summarization** to generate concise summaries of your notes.
+* 🎨 **Responsive UI** optimized for desktop and mobile.
 
-## Expanding the ESLint configuration
+![alt text](image.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+* **React** (functional components + hooks)
+* **Tailwind CSS** (utility-first styling)
+
+## 📂 Project Structure
+
+![alt text](image-1.png)
+
+## ⚡ Getting Started
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/DEVnitishOfficial/VoiceNotes_GenAI_Frontend.git
+   cd VoiceNotes_GenAI_Frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+4. **Open the app**
+   Visit [http://localhost:5173](http://localhost:5173) (Vite default) in your browser.
+
+## 🔗 Backend Integration
+
+This frontend connects to the **VoiceNotes GenAI Backend** for audio transcription, note management, and AI summarization. Make sure the backend is running and the API base URL is properly configured in your environment variables.
+
+Example:
+
+```
+VITE_API_URL=http://localhost:5000/api
+```
+
+## 📸 UI Preview
+
+* Upload or record audio from the **Header** section.
+* Manage notes with interactive **NoteCards** (edit, delete, summarize).
+* **NoteEditor Modal** allows editing and updating note content.

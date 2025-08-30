@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import NotesPage from '../pages/NotesPage'
 
 export default function Recorder ({ onBlobReady }) {
   const mediaRecorderRef = useRef(null)
@@ -15,8 +16,9 @@ export default function Recorder ({ onBlobReady }) {
     }
     rec.onstop = () => {
       const blob = new Blob(chunksRef.current, { type: 'audio/webm' })
+      const url = URL.createObjectURL(blob)
       chunksRef.current = []
-      onBlobReady?.(blob)
+      onBlobReady?.(blob, url)
     }
 
     rec.start()

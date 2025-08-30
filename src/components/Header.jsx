@@ -42,14 +42,14 @@ export default function Header ({
           {!isRecording ? (
             <button
               onClick={onRecordStart}
-              className='px-3 py-2 text-sm rounded-lg bg-green-500 text-white'
+              className='px-6 py-3 text-sm font-bold rounded-xl text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 transition duration-500 ease-in-out transform hover:shadow-xl hover:shadow-green-500/50'
             >
               Start Recording
             </button>
           ) : (
             <button
               onClick={onRecordStop}
-              className='px-3 py-2 text-sm rounded-lg bg-red-500 text-white'
+              className='px-6 py-3 text-sm font-bold rounded-xl text-white bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 transition duration-500 ease-in-out transform hover:shadow-xl hover:shadow-red-500/50'
             >
               Stop
             </button>

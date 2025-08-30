@@ -16,7 +16,7 @@ export default function useNotes() {
     try {
       setLoading(true);
       const res = await getNotes();
-      // backend may return array or {data: []}; normalize
+      
       const list = Array.isArray(res) ? res : res?.data || [];
       setNotes(list);
       setError(null);
