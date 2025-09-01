@@ -19,7 +19,6 @@ This is the **frontend application** for the Voice Notes GenAI project. It provi
 * **Tailwind CSS** (utility-first styling)
 
 ## 📂 Project Structure
-
 ![alt text](image-1.png)
 
 ## ⚡ Getting Started

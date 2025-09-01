@@ -17,6 +17,7 @@ export const transcribeAudio = async (file, title) => {
 const form = new FormData();
 form.append("audio", file);
 if (title) form.append("title", title);
+console.log("see form data >>>>>", ...form);
 return API.post("/notes/transcribe", form).then(data);
 };
 

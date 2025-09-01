@@ -1,6 +1,8 @@
-export default function NoteCard ({ note, onEdit, onDelete, onSummarize }) {
+
+export default function NoteCard ({ note, onEdit, onDelete, onSummarize, isSummarizing }) {
   const { _id, id, title, transcript, summary } = note
   const noteId = _id || id
+
 
   return (
     <div className='bg-white rounded-2xl shadow-sm border p-4'>
@@ -42,14 +44,16 @@ export default function NoteCard ({ note, onEdit, onDelete, onSummarize }) {
         </button>
         <button
           onClick={() => onSummarize(noteId)}
-          disabled={!!summary}
-          className={`text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-300 ease-in-out ${
-            summary
-              ? 'bg-neutral-300 text-neutral-500 cursor-not-allowed'
-              : 'bg-indigo-600 text-white shadow-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50'
-          }`}
-        >
-          Generate Summary
+        disabled={!!summary || isSummarizing}
+        className={`text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-300 ease-in-out ${
+          isSummarizing 
+            ? 'bg-neutral-400 text-white shadow-none cursor-not-allowed' 
+            : summary
+            ? 'bg-neutral-300 text-neutral-500 cursor-not-allowed'
+            : 'bg-indigo-600 text-white shadow-md hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50' // Enabled state
+        }`}
+      >
+         {isSummarizing ? 'Generating summary...' : 'Generate Summary'}
         </button>
       </div>
     </div>

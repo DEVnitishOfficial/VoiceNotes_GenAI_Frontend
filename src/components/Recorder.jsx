@@ -1,5 +1,4 @@
 import { useRef, useState } from 'react'
-import NotesPage from '../pages/NotesPage'
 
 export default function Recorder ({ onBlobReady }) {
   const mediaRecorderRef = useRef(null)

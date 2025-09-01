@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 export default function NoteEditor ({ open, onClose, onSave, note }) {
   const [title, setTitle] = useState('')
   const [transcript, setTranscript] = useState('')
+  
 
   useEffect(() => {
     if (open && note) {
